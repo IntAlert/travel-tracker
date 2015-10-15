@@ -105,7 +105,6 @@ ref.orderByChild("email").equalTo('dlucas@international-alert.org').on("child_ad
     uLastname = userid.lastname;
     sessionStorage.setItem("name", uName);
     sessionStorage.setItem("lastname", uLastname);
-    document.getElementById("welcome").innerHTML = "Welcome back " + uName + "!";
     console.log(uName);
 });
     
