@@ -125,7 +125,7 @@ uName = userid.name;
 uLastname = userid.lastname;
 sessionStorage.setItem("name", uName);
 sessionStorage.setItem("lastname", uLastname);
-document.getElementById("welcome").innerHTML = "Welcome Back " + uName + "!";
+document.getElementById("welcome").innerHTML = "Welcome back " + uName + "!";
     console.log(uName);
 });
     
