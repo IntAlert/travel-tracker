@@ -289,5 +289,5 @@ function logout() {
     //LOGOUT
     console.log("LOGGING OUT");
     ref.unauth();
-    location.reload();
+    window.location("index.html");
 }
