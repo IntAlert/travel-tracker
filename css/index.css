@@ -1,0 +1,88 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    height: 100%;
+}
+
+.navbar-center {
+    left: 0;
+    margin: auto;
+    padding-top: 13px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.showtrips {
+    padding-right: 15px;
+}
+
+.showtripslabel {
+    padding-right: 4px;
+}
+
+.showtripslabeltext {
+    font-weight: normal;
+}
+
+.buttonSOSDismiss {
+    display: block;
+    margin: 0 auto;
+}
+
+.loginText {
+    float: left;
+    color: #333;
+}
+
+.loginField {
+    float: right;
+    width: 75%;
+}
+
+.dialogInverse .ui-dialog-titlebar {
+    color: #9d9d9d;
+}
+
+.sosInfoWindow {
+    color: #333;
+}
+
+.hideTripsButton {
+    margin-left: 10px;
+}
+
+.navbarLogo {
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
+}
+
+.dropdown-menu {
+    background-color: #333;
+}
+
+.dropdown-menu>li>a {
+    color: #9d9d9d;
+}
+
+.dropdown-menu .divider {
+    background-color: #777;
+}
+
+.dialogInverse .ui-widget-header {
+    background: #333;
+}
+
+.dialogInverse .ui-widget-content {
+    color: #333;
+}
+
+.dialogInverse .ui-widget-content .ui-state-default {
+    background: #9d9d9d;
+    color: #333;
+}

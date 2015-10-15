@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Alert Travel Map</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/index.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa8YZ85pvYQYYXo-2Lrjs7P0l4sey1B4s&callback=initMap"></script>
+        <script src='https://cdn.firebase.com/js/client/2.3.0/firebase.js'></script>
+        <script src='js/index.js'></script>
+        <script src='js/login.js'></script>
+    </head>
+    <body>
+        <!--JQUERY UI DIALOG AND BOOTSTRAP ALERTS-->
+        <div id="dialogLogin" class="dialogInverse" title="Login">
+            <form name="loginform">
+                <fieldset>
+                    <label for="username" class="loginText">Email </label>
+                    <input type="text" name="username" id="username" value="dlucas@international-alert.org" class="text ui-widget-content ui-corner-all loginField"><br><br>
+                    <label for="password" class="loginText">Password </label>
+                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all loginField">
+                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                </fieldset>
+            </form>
+        </div>
+        
+        <div id="dialogSOSDismiss" title="Dismiss Trip?">This will remove the SOS marker from the map. Are you sure?</div>
+        
+        <!-- ========== -->
+        
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <span><img class="navbarLogo" alt="Alert Security App Map" src="resources/images/Alert9696.png"></span>Alert Travel Map
+                    </a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Settings</li>
+                                <li><a id="tripsToggle" href="#" onclick="toggleViewTrips()">Disable Trips</a></li>
+                                <li><a href="https://github.com/IntAlert/trackermaps" target="_blank">Help</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#" onclick="logout()">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="map"></div>
+        <div class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container">
+                <span class="navbar-text navbar-center">© International Alert</span>
+                <span class="navbar-text navbar-right">Version: <script>document.write(version)</script></span>
+            </div>
+        </div>
+    </body>
+</html>
