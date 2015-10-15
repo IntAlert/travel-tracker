@@ -47,15 +47,6 @@ ref.on('child_added', function(snapshot){
     
     console.log(newTrip);
     
-//// Create a callback to handle the result of the authentication
-//function authHandler(error, authData) {
-//  if (error) {
-//    console.log("Login Failed!", error);
-//  } else {
-//    console.log("Authenticated successfully with payload:", authData);
-//  }
-//}    
-    
 //This sets up an empty array that will be filled with the data pulled from Firebase    
 var count = 0;
 var triggered = false;
@@ -108,11 +99,6 @@ function authHandler(error, authData) {
       buildCalendar();
   }
 }
-
-//// Register the callback to be fired every time auth state changes
-//var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/");
-//ref.onAuth(authData);
-//console.log(ref);
     
 // Get a reference to our posts
 var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/contacts/");
