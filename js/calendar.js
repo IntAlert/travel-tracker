@@ -141,14 +141,11 @@ function ShowDialogBox(title, content, btn1text, btn2text, functionText, paramet
             effect: 'scale',
             duration: 400
         },
-
         buttons: [{
             text: btn1text,
                 "class": btn1css,
             click: function () {
-
                 $("#alertbox").dialog('close');
-
             }
         }]
     });
