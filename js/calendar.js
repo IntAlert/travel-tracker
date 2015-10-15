@@ -1,12 +1,40 @@
-console.log('Hello')
-
-// Or with an email/password combination
 var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
-ref.authWithPassword({
-email    : 'dlucas@international-alert.org',
-password : '1'
-}, authHandler);
-    
+
+console.log('Hello')
+            // Or with an email/password combination
+            var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
+            ref.authWithPassword({
+                email    : 'dlucas@international-alert.org',
+                password : '1'
+            }, authHandler);
+            function firstRun() {
+                var status = localStorage.getItem("status")
+                if (status === null || status.length === 0){
+                    window.location="create.html";
+                }
+            }
+            function authMe() {
+                username = document.getElementById("name").value;
+                if(typeof(Storage) !== "undefined") {
+                    sessionStorage.setItem("email", username);
+                }
+                password = document.getElementById("password").value;
+                if (username === "") {
+                    $( "#dialogEmail" ).dialog( "open" );
+                    return;
+                } else {
+                    if (password === "") {
+                        $( "#dialogPass" ).dialog( "open" );
+                        return;
+                    } else {
+                        var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/contacts");
+                        ref.authWithPassword({
+                            "email": username,
+                            "password": password
+                        }, authHandler);
+                    }
+                }
+            }
 
 // console.log('Hi '+ref)
 function buildCalendar(){
@@ -17,7 +45,7 @@ ref.on('child_added', function(snapshot){
         return;
     }
     
-console.log(newTrip)
+    console.log(newTrip)
     
 //// Create a callback to handle the result of the authentication
 //function authHandler(error, authData) {
@@ -29,7 +57,8 @@ console.log(newTrip)
 //}
 
 //--------------------------------------Line-Break---------------------------------------------------------------------------------------
-
+    
+    
 //This sets up an empty array that will be filled with the data pulled from Firebase    
 var count = 0;
 var triggered = false;
@@ -47,7 +76,8 @@ trip[count][5] = newTrip.contactlastname;
 trip[count][6] = newTrip.name +" " + newTrip.lastname;
 trip[count][7] = newTrip.contactemail;
 trip[count][8] = newTrip.contactphone;
-console.log(trip[count][2])
+     console.log(trip[count][2])
+     
 
 //  This block of code re-formats the date into a format that the calendar understands, i.e. the American format (...ugh)
     var newEvent = new Object();
@@ -99,7 +129,7 @@ uName = userid.name;
 uLastname = userid.lastname;
 sessionStorage.setItem("name", uName);
 sessionStorage.setItem("lastname", uLastname);
-document.getElementById("welcome").innerHTML = "Welcome " + uName;
+document.getElementById("welcome").innerHTML = "Welcome Back " + uName + "!";
     console.log(uName);
 });
     
@@ -125,7 +155,7 @@ function ShowDialogBox(title, content, btn1text, btn2text, functionText, paramet
     }
     $("#lblMessage").html(content);
 
-    $("#dialog").dialog({
+    $("#alertbox").dialog({
         resizable: false,
         title: title,
         modal: true,
@@ -142,14 +172,8 @@ function ShowDialogBox(title, content, btn1text, btn2text, functionText, paramet
                 "class": btn1css,
             click: function () {
 
-                $("#dialog").dialog('close');
+                $("#alertbox").dialog('close');
 
-            }
-        }, {
-            text: btn2text,
-                "class": btn2css,
-            click: function () {
-                $("#dialog").dialog('close');
             }
         }]
     });
@@ -189,7 +213,7 @@ function ShowDialogBox(title, content, btn1text, btn2text, functionText, paramet
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
             eventClick: function(calEvent, jsEvent, view){ //View event info onClick
-                ShowDialogBox('Trip Information', '<b>Name:</b> ' + calEvent.title +'<br/>'+ '<b>Destination:</b> ' + calEvent.description +'<br/>'+ '<b>Start:</b> ' + calEvent.newstart +'<br/>'+ '<b>End:</b> ' + calEvent.newend +'<br/>'+ '<b>Contact:</b> ' + calEvent.contact +'<br/>'+ '<b>Contact Email:</b> ' + calEvent.contactemail +'<br/>'+ '<b>Contact Phone:</b> ' + calEvent.contactphone, 'Ok', 'Cancel');
+                ShowDialogBox('Trip Information', '<b>Name:</b> ' + calEvent.title +'<br/>'+ '<b>Destination:</b> ' + calEvent.description +'<br/>'+ '<b>Start:</b> ' + calEvent.newstart +'<br/>'+ '<b>End:</b> ' + calEvent.newend +'<br/>'+ '<b>Contact:</b> ' + calEvent.contact +'<br/>'+ '<b>Contact Email:</b> ' + calEvent.contactemail +'<br/>'+ '<b>Contact Phone:</b> ' + calEvent.contactphone, 'Ok');
                 
             }
 
