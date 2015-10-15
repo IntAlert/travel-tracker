@@ -1,19 +1,21 @@
 var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
 
 console.log('Hello')
-            // Or with an email/password combination
-            var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
-            ref.authWithPassword({
-                email    : 'dlucas@international-alert.org',
-                password : '1'
-            }, authHandler);
-            function firstRun() {
-                var status = localStorage.getItem("status")
-                if (status === null || status.length === 0){
-                    window.location="create.html";
-                }
-            }
-            function authMe() {
+// Or with an email/password combination
+var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
+ref.authWithPassword({
+    email    : 'dlucas@international-alert.org',
+    password : '1'
+}, authHandler);
+
+function firstRun() {
+    var status = localStorage.getItem("status")
+    if (status === null || status.length === 0){
+        window.location="create.html";
+    }
+}
+
+function authMe() {
                 username = document.getElementById("name").value;
                 if(typeof(Storage) !== "undefined") {
                     sessionStorage.setItem("email", username);
@@ -36,7 +38,6 @@ console.log('Hello')
                 }
             }
 
-// console.log('Hi '+ref)
 function buildCalendar(){
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
 ref.on('child_added', function(snapshot){
@@ -54,10 +55,7 @@ ref.on('child_added', function(snapshot){
 //  } else {
 //    console.log("Authenticated successfully with payload:", authData);
 //  }
-//}
-
-//--------------------------------------Line-Break---------------------------------------------------------------------------------------
-    
+//}    
     
 //This sets up an empty array that will be filled with the data pulled from Firebase    
 var count = 0;
@@ -78,7 +76,6 @@ trip[count][7] = newTrip.contactemail;
 trip[count][8] = newTrip.contactphone;
      console.log(trip[count][2])
      
-
 //  This block of code re-formats the date into a format that the calendar understands, i.e. the American format (...ugh)
     var newEvent = new Object();
     console.log('adding calendar')
@@ -221,7 +218,6 @@ function ShowDialogBox(title, content, btn1text, btn2text, functionText, paramet
 		
 	})
             })
-
 
         $(document).ready(function () {
     $('#btnTest').click(function () {
