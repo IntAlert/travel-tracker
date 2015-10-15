@@ -196,5 +196,5 @@ function logout() {
     //LOGOUT
     console.log("LOGGING OUT");
     ref.unauth();
-    window.location("index.html");
+    window.location="index.html";
 }
