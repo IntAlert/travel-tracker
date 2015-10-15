@@ -1,42 +1,41 @@
 var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
 
-console.log('Hello')
 // Or with an email/password combination
 var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
 ref.authWithPassword({
-    email    : 'dlucas@international-alert.org',
-    password : '1'
+    email    : "dlucas@international-alert.org",
+    password : "1"
 }, authHandler);
 
 function firstRun() {
-    var status = localStorage.getItem("status")
+    var status = localStorage.getItem("status");
     if (status === null || status.length === 0){
         window.location="create.html";
     }
 }
 
 function authMe() {
-                username = document.getElementById("name").value;
-                if(typeof(Storage) !== "undefined") {
-                    sessionStorage.setItem("email", username);
-                }
-                password = document.getElementById("password").value;
-                if (username === "") {
-                    $( "#dialogEmail" ).dialog( "open" );
-                    return;
-                } else {
-                    if (password === "") {
-                        $( "#dialogPass" ).dialog( "open" );
-                        return;
-                    } else {
-                        var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/contacts");
-                        ref.authWithPassword({
-                            "email": username,
-                            "password": password
-                        }, authHandler);
-                    }
-                }
-            }
+    username = document.getElementById("name").value;
+    if(typeof(Storage) !== "undefined") {
+        sessionStorage.setItem("email", username);
+    }
+    password = document.getElementById("password").value;
+    if (username === "") {
+        $( "#dialogEmail" ).dialog( "open" );
+        return;
+    } else {
+        if (password === "") {
+            $( "#dialogPass" ).dialog( "open" );
+            return;
+        } else {
+            var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/contacts");
+            ref.authWithPassword({
+                "email": username,
+                "password": password
+            }, authHandler);
+        }
+    }
+}
 
 function buildCalendar(){
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
@@ -46,7 +45,7 @@ ref.on('child_added', function(snapshot){
         return;
     }
     
-    console.log(newTrip)
+    console.log(newTrip);
     
 //// Create a callback to handle the result of the authentication
 //function authHandler(error, authData) {
@@ -74,12 +73,12 @@ trip[count][5] = newTrip.contactlastname;
 trip[count][6] = newTrip.name +" " + newTrip.lastname;
 trip[count][7] = newTrip.contactemail;
 trip[count][8] = newTrip.contactphone;
-     console.log(trip[count][2])
+     console.log(trip[count][2]);
      
 //  This block of code re-formats the date into a format that the calendar understands, i.e. the American format (...ugh)
     var newEvent = new Object();
-    console.log('adding calendar')
-    console.log(trip[count][6])
+    console.log('adding calendar');
+    console.log(trip[count][6]);
     newEvent.title = trip[count][6];
     newEvent.start = parseDMY(trip[count][2]).toYMD();
     newEvent.end = parseDMY(trip[count][3]).toYMD();
@@ -98,7 +97,7 @@ trip[count][8] = newTrip.contactphone;
     
     count = count + 1;   
 });
-};
+}
     
 // Create a callback to handle the result of the authentication
 function authHandler(error, authData) {
@@ -179,7 +178,7 @@ function ShowDialogBox(title, content, btn1text, btn2text, functionText, paramet
 //	function reload_calendar(){
     $(document).ready(function() {
 //this initializes the calendar
-        console.log("I'm here!")
+        console.log("I'm here!");
         var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips/");
         ref.on("child_added", function(snapshot) {
             var data = snapshot.val();
@@ -214,10 +213,10 @@ function ShowDialogBox(title, content, btn1text, btn2text, functionText, paramet
                 
             }
 
-		})
+		});
 		
-	})
-            })
+	});
+            });
 
         $(document).ready(function () {
     $('#btnTest').click(function () {
