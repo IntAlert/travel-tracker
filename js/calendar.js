@@ -7,13 +7,6 @@ ref.authWithPassword({
     password : "1"
 }, authHandler);
 
-//function firstRun() {
-//    var status = localStorage.getItem("status");
-//    if (status === null || status.length === 0){
-//        window.location="create.html";
-//    }
-//}
-
 function authMe() {
     username = document.getElementById("name").value;
     if(typeof(Storage) !== "undefined") {
@@ -50,7 +43,6 @@ function buildCalendar(){
         var triggered = false;
         var trip = [];
         var myText = "";
-        //var newTrip = snapshot.val();
         //This collect the individual values from Firebase       
         trip[count] = new Array;
         trip[count][1] = newTrip.destination;
@@ -150,7 +142,6 @@ function ShowDialogBox(title, content, btn1text, btn2text, functionText, paramet
     });
 }
 
-//	function reload_calendar(){
 $(document).ready(function() {
     //this initializes the calendar
     console.log("I'm here!");
@@ -162,12 +153,7 @@ $(document).ready(function() {
             console.log(data.lastname);   
         }
         name = data.name +data.lastname;
-//            destination = this.destination;
-//            start = this.leave;
-//            end = this.back;
-//            contact = this.contactname +this.contactlastname;
-//            econtact = this.contactemail;
-//		console.log("intializing calendar now")
+        
         $('#calendar').fullCalendar({
 			theme: true,
 			header: {
