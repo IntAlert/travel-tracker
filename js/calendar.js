@@ -7,12 +7,12 @@ ref.authWithPassword({
     password : "1"
 }, authHandler);
 
-function firstRun() {
-    var status = localStorage.getItem("status");
-    if (status === null || status.length === 0){
-        window.location="create.html";
-    }
-}
+//function firstRun() {
+//    var status = localStorage.getItem("status");
+//    if (status === null || status.length === 0){
+//        window.location="create.html";
+//    }
+//}
 
 function authMe() {
     username = document.getElementById("name").value;
