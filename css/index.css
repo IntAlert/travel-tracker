@@ -17,18 +17,6 @@ html, body {
     width: 100%;
 }
 
-.showtrips {
-    padding-right: 15px;
-}
-
-.showtripslabel {
-    padding-right: 4px;
-}
-
-.showtripslabeltext {
-    font-weight: normal;
-}
-
 .buttonSOSDismiss {
     display: block;
     margin: 0 auto;

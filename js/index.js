@@ -193,7 +193,6 @@ function plotTrips() {
         //CHECK IF DATE IS VALID (TODAY OR LATER)
         //GET TODAY
         var today = new Date();
-//        var todayutc = new Date(Date.UTC(today)); //CONVERT TO UTC
         today.setHours(0);
         today.setMinutes(0);
         today.setSeconds(0);
@@ -205,28 +204,12 @@ function plotTrips() {
         var backmonth = backsplit[1];
         var backday = backsplit[0];
         var backformatted = new Date(backyear, backmonth-1, backday);
-        //SET DATE AS UTC FROM VARS
-//        var leaveutc = new Date(Date.UTC(leaveyear, leavemonth, leaveday));
-//        var leaveutc = new Date(Date.UTC(leaveobject));
         if (backformatted >= today) {
             console.log("WILL BE SHOWN");
             geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
-            document.getElementById("checkbox").disabled = false;
         } else {
             console.log("WILL NOT BE SHOWN");
         }
-        //CONVERTING DATES TO UTC
-//        var todayyear = today.getFullYear();
-//        var todaymonth = today.getMonth();
-//        var todayday = today.getDate();
-//        var todayformatted = todayday + "/" + todaymonth + "/" + todayyear;
-//        console.log("LEAVE: " + leave);
-//        console.log("YEAR: " + todayyear);
-//        console.log("MONTH: " + todaymonth);
-//        console.log("DAY: " + todayday);
-//        console.log("FORMATTED: " + todayformatted);
-//        geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
-//        document.getElementById("checkbox").disabled = false;
     });
 }
 
