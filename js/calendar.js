@@ -1,34 +1,44 @@
 var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
+ref.onAuth(authDataCallback);
 
-// Or with an email/password combination
-var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
-ref.authWithPassword({
-    email    : "dlucas@international-alert.org",
-    password : "1"
-}, authHandler);
-
-function authMe() {
-    username = document.getElementById("name").value;
-    if(typeof(Storage) !== "undefined") {
-        sessionStorage.setItem("email", username);
-    }
-    password = document.getElementById("password").value;
-    if (username === "") {
-        $( "#dialogEmail" ).dialog( "open" );
-        return;
+// Create a callback which logs the current auth state
+function authDataCallback(authData) {
+    if (authData) {
+        console.log("User " + authData.uid + " is logged in with " + authData.provider);
     } else {
-        if (password === "") {
-            $( "#dialogPass" ).dialog( "open" );
-            return;
-        } else {
-            var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/contacts");
-            ref.authWithPassword({
-                "email": username,
-                "password": password
-            }, authHandler);
-        }
+        //UNAUTH JUST IN CASE AND REDIRECT
+        ref.unauth();
+        window.location="index.html";
     }
 }
+
+//ref.authWithPassword({
+//    email    : "dlucas@international-alert.org",
+//    password : "1"
+//}, authHandler);
+//
+//function authMe() {
+//    username = document.getElementById("name").value;
+//    if(typeof(Storage) !== "undefined") {
+//        sessionStorage.setItem("email", username);
+//    }
+//    password = document.getElementById("password").value;
+//    if (username === "") {
+//        $( "#dialogEmail" ).dialog( "open" );
+//        return;
+//    } else {
+//        if (password === "") {
+//            $( "#dialogPass" ).dialog( "open" );
+//            return;
+//        } else {
+//            var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/contacts");
+//            ref.authWithPassword({
+//                "email": username,
+//                "password": password
+//            }, authHandler);
+//        }
+//    }
+//}
 
 function buildCalendar(){
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
