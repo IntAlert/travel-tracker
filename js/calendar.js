@@ -12,34 +12,6 @@ function authDataCallback(authData) {
     }
 }
 
-//ref.authWithPassword({
-//    email    : "dlucas@international-alert.org",
-//    password : "1"
-//}, authHandler);
-//
-//function authMe() {
-//    username = document.getElementById("name").value;
-//    if(typeof(Storage) !== "undefined") {
-//        sessionStorage.setItem("email", username);
-//    }
-//    password = document.getElementById("password").value;
-//    if (username === "") {
-//        $( "#dialogEmail" ).dialog( "open" );
-//        return;
-//    } else {
-//        if (password === "") {
-//            $( "#dialogPass" ).dialog( "open" );
-//            return;
-//        } else {
-//            var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/contacts");
-//            ref.authWithPassword({
-//                "email": username,
-//                "password": password
-//            }, authHandler);
-//        }
-//    }
-//}
-
 function buildCalendar(){
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
     ref.on('child_added', function(snapshot){
