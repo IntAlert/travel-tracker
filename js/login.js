@@ -24,6 +24,7 @@ function login(username, password) {
 function authDataCallback(authData) {
     if (authData) {
         console.log("User " + authData.uid + " is logged in with " + authData.provider);
+        document.getElementById("navbardropdown").className = "dropdown-toggled";
         authHandler();
         //NOTHING
     }
