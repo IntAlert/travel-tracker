@@ -1,5 +1,19 @@
+var remember = localStorage.getItem("remember");
+console.log("R: " + remember);
 var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/");
 ref.onAuth(authDataCallback);
+
+$(function() {
+    if (remember === "true") {
+        var email = localStorage.getItem("remail");
+        $('input:checkbox[name=rememberme]').attr('checked',true);
+        console.log(email);
+        $("#username").val(email);
+    } else if (remember === "false") {
+        $('input:checkbox[name=rememberme]').attr('checked',false);
+        $("#username").val("");
+    }
+});
 
 function authHandler(error, authData) {
     if (error) {
@@ -7,13 +21,13 @@ function authHandler(error, authData) {
     } else {
         console.log("Authenticated successfully:", authData);
         $( "#dialogLogin" ).dialog( "close" );
-//        document.getElementById("checkbox").disabled = false;
         plotTrips();
         plotSOS();
     }
 }
 
 function login(username, password) {
+    rememberMe(username);
     ref.authWithPassword({
         email    : username,
         password : password
@@ -30,6 +44,14 @@ function authDataCallback(authData) {
     }
 }
 
-function rememberMe() {
-    
+function rememberMe(username) {
+    if (document.getElementById("rememberme").checked === true) {
+        console.log("REMEMBER EMAIL");
+        localStorage.setItem("remember", "true");
+        localStorage.setItem("remail", username);
+    } else if (document.getElementById("rememberme").checked === false) {
+        console.log("DONT REMEMBER EMAIL");
+        localStorage.setItem("remember", "false");
+        localStorage.setItem("remail", "");
+    }
 }
