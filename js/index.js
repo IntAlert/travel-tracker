@@ -12,6 +12,7 @@ $(function() {
             draggable: false,
             resizable: false,
             autoOpen: true,
+            height: 200,
             width: 450,
             dialogClass: "dialogInverse",
             modal: true,
@@ -23,6 +24,9 @@ $(function() {
                 }
             }
         });
+    } else {
+        document.getElementById("navbardropdown").className = "dropdown-toggled"; //ENABLE DROPDOWN
+        console.log("I just enabled")
     }
 });
 

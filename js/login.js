@@ -25,8 +25,7 @@ function authDataCallback(authData) {
     if (authData) {
         console.log("User " + authData.uid + " is logged in with " + authData.provider);
         document.getElementById("navbardropdown").className = "dropdown-toggled"; //ENABLE DROPDOWN
+        console.log("i also enabled");
         authHandler();
-    } else {
-        document.getElementById("navbardropdown").className = "dropdown-toggled disabled"; //DISABLE DROPDOWN
     }
 }
