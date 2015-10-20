@@ -29,3 +29,7 @@ function authDataCallback(authData) {
         authHandler();
     }
 }
+
+function rememberMe() {
+    
+}

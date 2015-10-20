@@ -79,3 +79,11 @@ html, body {
 .fieldset-style {
     height: 50px;
 }
+
+.rememberme {
+    float: left;
+}
+
+.remembermeText {
+    padding-left: 5px;
+}

@@ -12,7 +12,7 @@ $(function() {
             draggable: false,
             resizable: false,
             autoOpen: true,
-            height: 200,
+            height: 240,
             width: 450,
             dialogClass: "dialogInverse",
             modal: true,
