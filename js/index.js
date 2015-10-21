@@ -56,6 +56,7 @@ var viewTrips = true;
 var tripMarkers = []; //CREATES ARRAY FOR TRIP MARKERS
 var sosMarkers = []; //CREATES ARRAY FOR SOS MARKERS
 var tripsToggle = "Disable";
+var tripno;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -275,4 +276,12 @@ function dismissSOS(sosKey) {
 function logout() {
     ref.unauth();
     window.location="index.html";
+}
+
+function tripno() {
+    tripno = tripMarkers.length;
+    console.log("tripno: " + tripno);
+    document.getElementById("tripno").innerHTML = tripno;
+    //get tripno
+    //inject to badge
 }
