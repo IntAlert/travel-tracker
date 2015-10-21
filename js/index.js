@@ -1,3 +1,4 @@
+/*jshint maxerr: 10000 */
 var version = "Dev";
 
 ////////// DIALOG \\\\\\\\\\
@@ -5,7 +6,7 @@ $(function() {
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/");
     var authData = ref.getAuth();
     console.log("authed " + authData);
-    if (authData == null) {
+    if (authData === null) {
         $( "#dialogLogin" ).dialog({
             closeOnEscape: false,
             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
@@ -26,7 +27,6 @@ $(function() {
         });
     } else {
         document.getElementById("navbardropdown").className = "dropdown-toggled"; //ENABLE DROPDOWN
-        console.log("I just enabled")
     }
 });
 
@@ -242,7 +242,7 @@ function plotSOS() {
 }
 
 function toggleViewTrips() {
-    if(viewTrips == true) {
+    if(viewTrips === true) {
         viewTrips = false;
         tripsToggle = "Enable";
         document.getElementById("tripsToggle").innerHTML = tripsToggle + " Trips";
@@ -273,8 +273,6 @@ function dismissSOS(sosKey) {
 }
 
 function logout() {
-    //LOGOUT
-    console.log("LOGGING OUT");
     ref.unauth();
     window.location="index.html";
 }
