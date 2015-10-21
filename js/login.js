@@ -27,7 +27,7 @@ function authHandler(error, authData) {
 }
 
 function login(username, password) {
-    rememberMe(username);
+    rememberMe(username); //PASS USERNAME
     ref.authWithPassword({
         email    : username,
         password : password
@@ -47,11 +47,11 @@ function authDataCallback(authData) {
 function rememberMe(username) {
     if (document.getElementById("rememberme").checked === true) {
         console.log("REMEMBER EMAIL");
-        localStorage.setItem("remember", "true");
-        localStorage.setItem("remail", username);
+        localStorage.setItem("remember", "true"); //SET REMEMBER TO TRUE
+        localStorage.setItem("remail", username); //SET REMEMBER EMAIL
     } else if (document.getElementById("rememberme").checked === false) {
         console.log("DONT REMEMBER EMAIL");
-        localStorage.setItem("remember", "false");
-        localStorage.setItem("remail", "");
+        localStorage.setItem("remember", "false"); //SET REMEMBER FALSE
+        localStorage.setItem("remail", ""); //CLEAR REMEMBER EMAIL
     }
 }
