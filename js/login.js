@@ -3,15 +3,14 @@ console.log("R: " + remember);
 var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/");
 ref.onAuth(authDataCallback);
 
-$(function() {
+$(function() { //ON LOAD
     if (remember === "true") {
-        var email = localStorage.getItem("remail");
-        $('input:checkbox[name=rememberme]').attr('checked',true);
-        console.log(email);
-        $("#username").val(email);
+        var email = localStorage.getItem("remail"); //PULL EMAIL FROM LOCALSTORAGE
+        $('input:checkbox[name=rememberme]').attr('checked',true); //SET JQUERYUI DIALOG ELEMENT
+        $("#username").val(email); //SET FIELD TO EMAIL
     } else if (remember === "false") {
-        $('input:checkbox[name=rememberme]').attr('checked',false);
-        $("#username").val("");
+        $('input:checkbox[name=rememberme]').attr('checked',false); //SET JQUERYUI DIALOG ELEMENT
+        $("#username").val(""); //CLEAR FIELD
     }
 });
 
