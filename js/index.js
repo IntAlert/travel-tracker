@@ -183,7 +183,7 @@ function placeSOSMarker(lat, lon, map, fullname, timestring, sosKey){
     });
 }
 
-function plotTrips(where) {
+function plotTrips() {
     console.log(where);
     var geocoder = new google.maps.Geocoder();
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");

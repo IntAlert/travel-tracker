@@ -20,7 +20,7 @@ function authHandler(error, authData) {
     } else {
         console.log("Authenticated successfully:", authData);
         $( "#dialogLogin" ).dialog( "close" );
-        plotTrips("called from authhandler");
+        plotTrips();
         plotSOS();
     }
 }
