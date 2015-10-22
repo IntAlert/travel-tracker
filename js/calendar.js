@@ -5,6 +5,7 @@ ref.onAuth(authDataCallback);
 function authDataCallback(authData) {
     if (authData) {
         console.log("User " + authData.uid + " is logged in with " + authData.provider);
+        buildCalendar();
     } else {
         //UNAUTH JUST IN CASE AND REDIRECT
         ref.unauth();
