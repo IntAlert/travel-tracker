@@ -20,7 +20,7 @@ function authHandler(error, authData) {
     } else {
         console.log("Authenticated successfully:", authData);
         $( "#dialogLogin" ).dialog( "close" );
-        plotTrips();
+        plotTrips("called from authhandler");
         plotSOS();
     }
 }
@@ -30,7 +30,7 @@ function login(username, password) {
     ref.authWithPassword({
         email    : username,
         password : password
-    }, authHandler);
+    }, authDataCallback);
 }
 
 // Create a callback which logs the current auth state

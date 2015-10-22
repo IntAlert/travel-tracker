@@ -183,12 +183,14 @@ function placeSOSMarker(lat, lon, map, fullname, timestring, sosKey){
     });
 }
 
-function plotTrips() {
+function plotTrips(where) {
+    console.log(where);
+    var geocoder = new google.maps.Geocoder();
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
     ref.on('child_added', function(snapshot){
-        var geocoder = new google.maps.Geocoder();
+//        var geocoder = new google.maps.Geocoder();
         var trip = snapshot.val();
-        console.log(trip);
+//        console.log(trip);
         var destination = trip.destination;
         var name = trip.name + " " + trip.lastname;
         console.log("NAME: " + name);
@@ -209,11 +211,13 @@ function plotTrips() {
         var backmonth = backsplit[1];
         var backday = backsplit[0];
         var backformatted = new Date(backyear, backmonth-1, backday);
+        ////////////
         if (backformatted >= today) {
-            console.log("WILL BE SHOWN");
+//            console.log("WILL BE SHOWN");
+            console.log("key: " + snapshot.key());
             geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
         } else {
-            console.log("WILL NOT BE SHOWN");
+//            console.log("WILL NOT BE SHOWN");
         }
     });
 }
