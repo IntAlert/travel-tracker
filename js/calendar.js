@@ -111,6 +111,7 @@ function ShowDialogBox(title, content, btn1text, btn2text, functionText, paramet
         width: '400px',
         height: 'auto',
         bgiframe: false,
+        dialogClass: "dialogInverse",
         hide: {
             effect: 'scale',
             duration: 400
