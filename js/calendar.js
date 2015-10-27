@@ -73,11 +73,7 @@ function authHandler(error, authData) {
 var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/contacts/");
     
 // Attach an asynchronous callback to read the data at our posts reference
-<<<<<<< HEAD
-ref.orderByChild("email").equalTo(ref.getAuth().password.email;).on("child_added", function(snapshot) {
-=======
-ref.orderByChild("email").equalTo('dlucas@international-alert.org').on("child_added", function(snapshot) {
->>>>>>> 477a78ceec31fa3454e19656278688a3d682ff20
+ref.orderByChild("email").equalTo(ref.getAuth().password.email).on("child_added", function(snapshot) {
     var userid = snapshot.val();
     console.log(userid);
     uName = userid.name;
