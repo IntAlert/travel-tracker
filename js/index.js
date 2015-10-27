@@ -1,3 +1,4 @@
+/*jshint maxerr: 10000 */
 var version = "Dev";
 
 ////////// DIALOG \\\\\\\\\\
@@ -5,13 +6,14 @@ $(function() {
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/");
     var authData = ref.getAuth();
     console.log("authed " + authData);
-    if (authData == null) {
+    if (authData === null) {
         $( "#dialogLogin" ).dialog({
             closeOnEscape: false,
             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
             draggable: false,
             resizable: false,
             autoOpen: true,
+            height: 230,
             width: 450,
             dialogClass: "dialogInverse",
             modal: true,
@@ -23,6 +25,8 @@ $(function() {
                 }
             }
         });
+    } else {
+        document.getElementById("navbardropdown").className = "dropdown-toggled"; //ENABLE DROPDOWN
     }
 });
 
@@ -52,6 +56,7 @@ var viewTrips = true;
 var tripMarkers = []; //CREATES ARRAY FOR TRIP MARKERS
 var sosMarkers = []; //CREATES ARRAY FOR SOS MARKERS
 var tripsToggle = "Disable";
+var tripno;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -179,11 +184,12 @@ function placeSOSMarker(lat, lon, map, fullname, timestring, sosKey){
 }
 
 function plotTrips() {
+    var geocoder = new google.maps.Geocoder();
     var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
     ref.on('child_added', function(snapshot){
-        var geocoder = new google.maps.Geocoder();
+//        var geocoder = new google.maps.Geocoder();
         var trip = snapshot.val();
-        console.log(trip);
+//        console.log(trip);
         var destination = trip.destination;
         var name = trip.name + " " + trip.lastname;
         console.log("NAME: " + name);
@@ -193,7 +199,6 @@ function plotTrips() {
         //CHECK IF DATE IS VALID (TODAY OR LATER)
         //GET TODAY
         var today = new Date();
-//        var todayutc = new Date(Date.UTC(today)); //CONVERT TO UTC
         today.setHours(0);
         today.setMinutes(0);
         today.setSeconds(0);
@@ -205,28 +210,14 @@ function plotTrips() {
         var backmonth = backsplit[1];
         var backday = backsplit[0];
         var backformatted = new Date(backyear, backmonth-1, backday);
-        //SET DATE AS UTC FROM VARS
-//        var leaveutc = new Date(Date.UTC(leaveyear, leavemonth, leaveday));
-//        var leaveutc = new Date(Date.UTC(leaveobject));
+        ////////////
         if (backformatted >= today) {
-            console.log("WILL BE SHOWN");
+//            console.log("WILL BE SHOWN");
+            console.log("key: " + snapshot.key());
             geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
-            document.getElementById("checkbox").disabled = false;
         } else {
-            console.log("WILL NOT BE SHOWN");
+//            console.log("WILL NOT BE SHOWN");
         }
-        //CONVERTING DATES TO UTC
-//        var todayyear = today.getFullYear();
-//        var todaymonth = today.getMonth();
-//        var todayday = today.getDate();
-//        var todayformatted = todayday + "/" + todaymonth + "/" + todayyear;
-//        console.log("LEAVE: " + leave);
-//        console.log("YEAR: " + todayyear);
-//        console.log("MONTH: " + todaymonth);
-//        console.log("DAY: " + todayday);
-//        console.log("FORMATTED: " + todayformatted);
-//        geocodeTripAddress(geocoder, map, destination, name, leave, back, contact);
-//        document.getElementById("checkbox").disabled = false;
     });
 }
 
@@ -255,7 +246,7 @@ function plotSOS() {
 }
 
 function toggleViewTrips() {
-    if(viewTrips == true) {
+    if(viewTrips === true) {
         viewTrips = false;
         tripsToggle = "Enable";
         document.getElementById("tripsToggle").innerHTML = tripsToggle + " Trips";
@@ -286,8 +277,14 @@ function dismissSOS(sosKey) {
 }
 
 function logout() {
-    //LOGOUT
-    console.log("LOGGING OUT");
     ref.unauth();
-    location.reload();
+    window.location="index.html";
+}
+
+function tripno() {
+    tripno = tripMarkers.length;
+    console.log("tripno: " + tripno);
+    document.getElementById("tripno").innerHTML = tripno;
+    //get tripno
+    //inject to badge
 }

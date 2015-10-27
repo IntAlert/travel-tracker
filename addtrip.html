@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Alert Add Trip</title>
+        
+        <script src='js/firebase.js'></script>
+        <script src='js/jquery.min.js'></script>
+        <script src='js/jquery-ui.min.js'></script>
+        <script src='js/addtrip.js'></script>
+<!--        <script src='js/calendar.js'></script>-->
+        
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/index.css">
+        <link href="css/styles.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/add trip form.css">
+        <link rel="stylesheet" href="css/pop-up styles.css">
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="js/jquery.reveal.js"></script>
+        
+        <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+        <script>var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");</script>
+        
+<!------------------------------------------------------------------------------------------------------------->
+        
+<div id="modal">
+	<div id="heading">
+		Thank You
+	</div>
+
+	<div id="content">
+		<p>Your trip has been added</p>
+
+		<a href="#" class="button green close"><img src="img/tick.png">Okay</a>
+	</div>
+</div>
+        
+<!------------------------------------------------------------------------------------------------------------->
+        
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index.html">
+                            <span><img class="navbarLogo" alt="Alert Travel Tracker" src="resources/images/Alert9696.png"></span>Alert Travel Tracker
+                        </a>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li><a href="index.html">Map View</a></li>
+                            <li><a href="calendar.html">Calendar</a></li>
+                            <li class="active"><a href="addtrip.html">Add Trip</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Settings</li>
+                                    <li><a href="https://github.com/IntAlert/trackermaps" target="_blank">Help</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#" onclick="logout()">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+<!------------------------------------------------------------------------------------------------------------->
+        
+    </head>
+    <body>
+        <div class="page-header container text-center">
+        </div>
+        <div id="container" class="container text-center">
+            <form name="tripdetails" id="tripdetails">
+                <div class="addtripform" >
+                    <h1>Add a New Trip</h1><br>
+                    <p>Date Leaving <br>
+                        <input type="text" name="startdate" id="startdate" class="input">
+                    </p>
+                    <p>Date Returning <br>
+                        <input type="text" name="enddate" id="enddate" class="input">
+                    </p>
+                    <p>Trip Type <br>
+                        <select name="tripType" id="tripType" class="input">
+                            <option value="">Select a type</option>
+                            <option value="Annual leave">Annual leave</option>
+                            <option value="Approved Alert leave">Approved Alert leave</option>
+                            <option value="Compassionate leave">Compassionate leave</option>
+                            <option value="Field trip">Field trip</option>
+                            <option value="Get-together">Get-together</option>
+                            <option value="Meeting">Meeting</option>
+                            <option value="Parental leave">Parental leave</option>
+                            <option value="R&R">R&R</option>
+                            <option value="Study leave">Study leave</option>
+                            <option value="Work hours">Work hours</option>
+                            <option value="Working from Home">Working from Home</option>
+                        </select>
+                    </p>
+                    <p>Destination <br>
+                        <select name="countrydd" id="countrydd" class="input" required>
+                            <option value="">Select a country</option>
+                        </select>
+                    </p>
+                    <p>Contact <br>
+                        <select name="contactdd" id="contactdd" class="input">
+                            <option value="">Select a contact</option>
+                        </select>
+                    </p>
+                </div>
+                <br>
+                <input class="submit" type="button" value="Confirm" onclick="addTrip();" style="padding: 8px;">
+                <input type="reset" value="Clear Form" style="padding: 8px;">
+                <input class="cancel" type="button" value="Cancel" onclick="location.href='index.html';" style="padding: 8px;">
+            </form>
+        </div>
+        
+<!------------------------------------------------------------------------------------------------------------->
+        
+        <div class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container">
+                <span class="navbar-text navbar-center">© International Alert</span>
+            </div>
+        </div>
+    </body>
+</html>

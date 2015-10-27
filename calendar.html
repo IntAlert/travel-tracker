@@ -1,354 +1,64 @@
-
+<!DOCTYPE HTML>
 <html>
-<head>
-<!--Initializing JQuery Libraries-->
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>   
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<!--<script src="http://code.jquery.com/jquery-2.1.4.js"></script>-->
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-<!--<script src="https://api.jqueryui.com/dialog"></script>-->
-    
-    
-    
-<!--Initializing Calendar Stuff-->
-<meta charset='utf-8' />
-<link rel='stylesheet' href='../lib/cupertino/jquery-ui.min.css' />
-<link href='../fullcalendar.css' rel='stylesheet' />
-<link href='../fullcalendar.print.css' rel='stylesheet' media='print' />
-<script src='../lib/moment.min.js'></script>
-<script src='../fullcalendar.min.js'></script>
-
-    
-<meta name="generator" content="Bootply" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/styles.css" rel="stylesheet">
-
-    
-    
-<!--Initializing Firebase Stuff-->
-<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
-<script>var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");</script>
-    
-
-<script src='../lib/dateFormat.js'></script>
-<!--------------------------------------Line-Break--------------------------------------------------------------------------------------->
-    
-   
-<script>
-console.log('Hello')
-
-// Or with an email/password combination
-var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
-ref.authWithPassword({
-email    : 'dlucas@international-alert.org',
-password : '1'
-}, authHandler);
-    
-function firstRun() {
-    var status = localStorage.getItem("status")
-    if (status === null || status.length === 0){
-        window.location="create.html";
-    }
-}
-
-function authMe() {
-username = document.getElementById("name").value;
-if(typeof(Storage) !== "undefined") {
-            sessionStorage.setItem("email", username);
-}
-password = document.getElementById("password").value;
-if (username === "") {
-    $( "#dialogEmail" ).dialog( "open" );
-   return;
-} else {
-if (password === "") {
-    $( "#dialogPass" ).dialog( "open" );
-   return;
-} else {
-    var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/contacts");
-        ref.authWithPassword({
-            "email": username,
-            "password": password
-            }, authHandler);
-        }
-    }
-}
-
-// console.log('Hi '+ref)
-function buildCalendar(){
-    var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips");
-ref.on('child_added', function(snapshot){
-    var newTrip = snapshot.val();
-    if (newTrip == 'Do not delete'){
-        return;
-    }
-    
-    console.log(newTrip)
-    
-//// Create a callback to handle the result of the authentication
-//function authHandler(error, authData) {
-//  if (error) {
-//    console.log("Login Failed!", error);
-//  } else {
-//    console.log("Authenticated successfully with payload:", authData);
-//  }
-//}
-
-//--------------------------------------Line-Break---------------------------------------------------------------------------------------
-    
-    
-//This sets up an empty array that will be filled with the data pulled from Firebase    
-var count = 0;
-var triggered = false;
-var trip = [];
-var myText = "";
-//var newTrip = snapshot.val();
-
-//This collect the individual values from Firebase       
-trip[count] = new Array();
-trip[count][1] = newTrip.destination;
-trip[count][2] = newTrip.leave;
-trip[count][3] = newTrip.back;
-trip[count][4] = snapshot.key();
-trip[count][5] = newTrip.contactlastname;
-trip[count][6] = newTrip.name +" " + newTrip.lastname;
-trip[count][7] = newTrip.contactemail;
-trip[count][8] = newTrip.contactphone;
-     console.log(trip[count][2])
-     
-
-//  This block of code re-formats the date into a format that the calendar understands, i.e. the American format (...ugh)
-    var newEvent = new Object();
-    console.log('adding calendar')
-    console.log(trip[count][6])
-    newEvent.title = trip[count][6];
-    newEvent.start = parseDMY(trip[count][2]).toYMD();
-    newEvent.end = parseDMY(trip[count][3]).toYMD();
-    newEvent.allDay = true;
-    newEvent.description = trip[count][1];
-    newEvent.contact = trip[count][5];
-    newEvent.newstart = trip[count][2];
-    newEvent.newend = trip[count][3];
-    newEvent.contactemail = trip[count][7];
-    newEvent.contactphone = trip[count][8];
-    
-    console.log(trip[count][2]);
-    console.log(parseDMY(trip[count][2]));
-    $('#calendar').fullCalendar( 'renderEvent', newEvent, true );
-    console.log(parseDMY(trip[count][2]).toYMD());
-    
-    count = count + 1;   
-});
-};
-    
-// Create a callback to handle the result of the authentication
-function authHandler(error, authData) {
-  if (error) {
-    console.log("Login Failed!", error);
-  } else {
-    console.log("Authenticated successfully with payload:");
-      buildCalendar();
-  }
-}
-
-//// Register the callback to be fired every time auth state changes
-//var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/");
-//ref.onAuth(authData);
-//console.log(ref);
-    
-// Get a reference to our posts
-var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/contacts/");
-    
-// Attach an asynchronous callback to read the data at our posts reference
-ref.orderByChild("email").equalTo('dlucas@international-alert.org').on("child_added", function(snapshot) {
-var userid = snapshot.val();
-    console.log(userid);
-uName = userid.name;
-uLastname = userid.lastname;
-sessionStorage.setItem("name", uName);
-sessionStorage.setItem("lastname", uLastname);
-document.getElementById("welcome").innerHTML = "Welcome Back " + uName + "!";
-    console.log(uName);
-});
-    
-function ShowCustomDialog() {
-
-    ShowDialogBox('Trip Information', 'Record updated successfully.', 'Ok', '', 'GoToAssetList', null);
-}
-
-function ShowDialogBox(title, content, btn1text, btn2text, functionText, parameterList) {
-    var btn1css;
-    var btn2css;
-
-    if (btn1text == '') {
-        btn1css = "hidecss";
-    } else {
-        btn1css = "showcss";
-    }
-
-    if (btn2text == '') {
-        btn2css = "hidecss";
-    } else {
-        btn2css = "showcss";
-    }
-    $("#lblMessage").html(content);
-
-    $("#alertbox").dialog({
-        resizable: false,
-        title: title,
-        modal: true,
-        width: '400px',
-        height: 'auto',
-        bgiframe: false,
-        hide: {
-            effect: 'scale',
-            duration: 400
-        },
-
-        buttons: [{
-            text: btn1text,
-                "class": btn1css,
-            click: function () {
-
-                $("#alertbox").dialog('close');
-
-            }
-        }]
-    });
-}
-
-//	function reload_calendar(){
-    $(document).ready(function() {
-//this initializes the calendar
-        console.log("I'm here!")
-        var ref = new Firebase("https://crackling-fire-1447.firebaseio.com/trips/");
-        ref.on("child_added", function(snapshot) {
-            var data = snapshot.val();
-            var datakey = snapshot.key();
-//            console.log(data.destination);
-            
-            if ((typeof data.destination != 'undefined'), (typeof data.name != 'undefined'), (typeof data.lastname != 'undefined')){
-                console.log(data.lastname);
-                
-            }
-            
-            name = data.name +data.lastname;
-//            destination = this.destination;
-//            start = this.leave;
-//            end = this.back;
-//            contact = this.contactname +this.contactlastname;
-//            econtact = this.contactemail;
-//		console.log("intializing calendar now")
-        $('#calendar').fullCalendar({
-			theme: true,
-			header: {
-				left: 'prev,next',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-			},
-            selectable: true,
-            selectHelper: true,
-			editable: true,
-			eventLimit: true, // allow "more" link when too many events
-            eventClick: function(calEvent, jsEvent, view){ //View event info onClick
-                ShowDialogBox('Trip Information', '<b>Name:</b> ' + calEvent.title +'<br/>'+ '<b>Destination:</b> ' + calEvent.description +'<br/>'+ '<b>Start:</b> ' + calEvent.newstart +'<br/>'+ '<b>End:</b> ' + calEvent.newend +'<br/>'+ '<b>Contact:</b> ' + calEvent.contact +'<br/>'+ '<b>Contact Email:</b> ' + calEvent.contactemail +'<br/>'+ '<b>Contact Phone:</b> ' + calEvent.contactphone, 'Ok');
-                
-            }
-
-		})
-		
-	})
-            })
-
-
-        $(document).ready(function () {
-    $('#btnTest').click(function () {
-        ShowCustomDialog();
-    });
-});
-
-    
-</script>
-    
-<!--------------------------------------Line-Break--------------------------------------------------------------------------------------->
-<!--
-I'm bored so here's a Dalek:
-                   ____
-                 /  @   \==]|[=(]       E X T E R M I N A T E ! !
-                |--------|
-                ==========       .  *                                     *
-                ==========     .\ * . *.   *                         .    * \  .
-               ||||||||||||      \ * ./  *    .   *                      .  \ \
-              |||||||||| --]%%%%%% .- =--=---=-=-=-=--=-=--=-==-----=-=-=-=-=-=
-              [=========\  ]===========(  *                             . /  /
-             [==============|   / *  \    .                          *  *   /  .
-             C| @ @ @ @ @ @ D         *      *                        *
-              |              \           .                          *  *
-            C| @  @ @  @ @ @  D       .
-             |                 \          *                          *
-           C| @  @  @  @  @  @  D
-            |                    \ 
-          C| @  @  @   @   @   @  D
-           |                       \
-          |@@@@@@@@@@@@@@@@@@@@@@@@@|
-           -------------------------  
--->
-<!--------------------------------------Line-Break--------------------------------------------------------------------------------------->
-<style>
-
-	body {
-		margin: 40px 10px;
-		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
-
-	#calendar {
-		max-width: 900px;
-		margin: 0 auto;
-	}
-
-</style>
-
-    
-</head>
-    
-<!--------------------------------------Line-Break--------------------------------------------------------------------------------------->
-    
-<body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><img src="img/logo_140x51.png" alt="international alert" style="margin-top: -15px"/></a>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>Alert Travel Map</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/calendar.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src='https://cdn.firebase.com/js/client/2.3.0/firebase.js'></script>
+        <script src="js/dateFormat.js"></script>
+        <script src="js/calendar.js"></script>
+        
+        <link href="css/fullcalendar.css" rel="stylesheet" />
+<!--        <link href="css/fullcalendar.print.css" rel="stylesheet" media="print" />-->
+        <script src="js/moment.min.js"></script>
+        <script src="js/fullcalendar.min.js"></script>
+        <link href="css/styles.css" rel="stylesheet">
+    </head>  
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index.html">
+                            <span><img class="navbarLogo" alt="Alert Security App Map" src="resources/images/Alert9696.png"></span>Alert Travel Map
+                        </a>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li><a href="index.html">Map View</a></li>
+                            <li class="active"><a href="calendar.html">Calendar</a></li>
+                            <li><a href="#">Add Trip</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Settings</li>
+                                    <li><a href="https://github.com/IntAlert/trackermaps" target="_blank">Help</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#" onclick="logout()">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        <div id="alertbox" title="Alert message" style="visibility = visible">
+            <label id="lblMessage"></label>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Add Trip</a></li>
-            <li><a href="#">Calendar View</a></li>
-            <li><a href="#">Map View</a></li>
-          </ul>
+        <span id="selector"></span>
+        <div id="calendar" class="calendar"></div>
+        <div class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container">
+                <span class="navbar-text navbar-center">© International Alert</span>
+            </div>
         </div>
-      </div>
-</nav>    
-<br>   
-<h1 id="welcome" style="text-align: center"></h1>
-<div id="alertbox" title="Alert message" style="visibility = visible">
-    <label id="lblMessage"></label>
-</div>
-    <span id="selector"></span>
-    <hr>
-<div id='calendar'></div>
-</body>
+    </body>
 </html>
